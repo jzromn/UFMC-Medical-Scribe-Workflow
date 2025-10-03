@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Day in the Life of a Remote Medical Scribe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F2F2F2;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            line-height: 1;
+            color: #0077C0;
+            margin: 0.5rem 0;
+        }
+        .flow-card {
+            border-left: 4px solid #00A1E4;
+        }
+    </style>
+</head>
+<body class="text-[#231F20]">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#005082] mb-2">A Day in the Life of a Remote Medical Scribe</h1>
+            <p class="text-lg text-gray-600">Visualizing the Workflow at United Family Medical Center</p>
+        </header>
+
+        <section id="kpis" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-12 text-center">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-4xl font-bold text-[#00A1E4]">1</p>
+                <p class="text-gray-600">Scribe</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-4xl font-bold text-[#00A1E4]">1</p>
+                <p class="text-gray-600">Provider</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-4xl font-bold text-[#00A1E4]">12-20</p>
+                <p class="text-gray-600">Patients / Day</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-4xl font-bold text-[#00A1E4]">8</p>
+                <p class="text-gray-600">Hours of Care</p>
+            </div>
+        </section>
+
+        <section id="toolkit" class="bg-white p-6 md:p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-2xl font-bold text-[#005082] mb-4 text-center">The Scribe's Digital Toolkit</h2>
+            <p class="text-center text-gray-600 mb-6">These essential tools enable seamless real-time collaboration and efficient documentation.</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <span class="text-4xl">⚕️</span>
+                    <p class="font-semibold mt-2">athena</p>
+                    <p class="text-sm text-gray-500">EHR System</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <span class="text-4xl">🤖</span>
+                    <p class="font-semibold mt-2">Heidi AI</p>
+                    <p class="text-sm text-gray-500">Scribing Assistant</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <span class="text-4xl">📹</span>
+                    <p class="font-semibold mt-2">Google Meet</p>
+                    <p class="text-sm text-gray-500">Live Communication</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <span class="text-4xl">📊</span>
+                    <p class="font-semibold mt-2">Excel</p>
+                    <p class="text-sm text-gray-500">Imaging Tracker</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <span class="text-4xl">💬</span>
+                    <p class="font-semibold mt-2">WhatsApp</p>
+                    <p class="text-sm text-gray-500">Group Comms</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-[#005082] mb-4 text-center">Anatomy of an Encounter</h2>
+                <p class="text-center text-gray-600 mb-6">Each patient visit, lasting 15 to 45 minutes, follows a core documentation cycle, assisted by AI and verified by the scribe.</p>
+                <div class="chart-container h-64 md:h-72">
+                    <canvas id="encounterChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-[#005082] mb-4 text-center">Idle Time Task Priority</h2>
+                <p class="text-center text-gray-600 mb-6">During gaps between patients, scribes pivot to administrative tasks in a specific order to maximize productivity.</p>
+                <div class="chart-container h-64 md:h-72">
+                    <canvas id="priorityChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="bg-white p-6 md:p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-2xl font-bold text-[#005082] mb-6 text-center">The Daily Workflow Timeline</h2>
+            <div class="flex flex-col items-center">
+                <div class="flow-card bg-gray-50 p-4 rounded-r-lg shadow-sm w-full md:w-3/4 mb-2">
+                    <p class="font-bold text-[#0077C0]">7:50 AM: Pre-Shift Setup</p>
+                    <p class="text-sm text-gray-600">Log in to all systems & send "Present" message on WhatsApp for attendance.</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-card bg-gray-50 p-4 rounded-r-lg shadow-sm w-full md:w-3/4 mb-2">
+                    <p class="font-bold text-[#0077C0]">8:00 AM - 12:00 PM: Morning Encounters</p>
+                    <p class="text-sm text-gray-600">Scribe live patient visits via iPad on Google Meet. Manage Provider's Inbox during idle time.</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-card bg-gray-50 p-4 rounded-r-lg shadow-sm w-full md:w-3/4 mb-2">
+                    <p class="font-bold text-[#0077C0]">12:00 PM - 1:00 PM: Unpaid Lunch Break</p>
+                    <p class="text-sm text-gray-600">Log out of all sensitive systems for security.</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+                 <div class="flow-card bg-gray-50 p-4 rounded-r-lg shadow-sm w-full md:w-3/4 mb-2">
+                    <p class="font-bold text-[#0077C0]">1:00 PM - 4:30 PM: Afternoon Encounters</p>
+                    <p class="text-sm text-gray-600">Continue scribing cycle. Focus on clearing Main Office Inbox during idle time.</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-card bg-gray-50 p-4 rounded-r-lg shadow-sm w-full md:w-3/4">
+                    <p class="font-bold text-[#0077C0]">4:30 PM - 5:00 PM: Shift Finalization</p>
+                    <p class="text-sm text-gray-600">Mandatory inbox clearance (both Provider and Main Office), finalize all charts, and hand off to provider.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="rules" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+             <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-[#005082] mb-4 text-center">Communication Protocols</h2>
+                <div class="flex flex-col space-y-4">
+                    <div class="border border-green-300 bg-green-50 p-4 rounded-lg">
+                        <p class="font-bold text-green-800">Confidential (PHI)</p>
+                        <p class="text-sm text-green-700">All communication containing patient information MUST use secure **athena Text**.</p>
+                    </div>
+                    <div class="border border-blue-300 bg-blue-50 p-4 rounded-lg">
+                        <p class="font-bold text-blue-800">General & Non-Confidential</p>
+                        <p class="text-sm text-blue-700">Use **WhatsApp** for attendance and group updates. Use **Google Meet** for live encounter communication.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-[#005082] mb-4 text-center">Provider Absence Protocol</h2>
+                <p class="text-center text-gray-600 mb-6">A clear decision tree ensures productivity is maintained if the primary provider is unavailable.</p>
+                <div class="flex flex-col items-center text-center">
+                    <div class="bg-blue-100 p-3 rounded-md w-full">Is main provider absent?</div>
+                    <div class="flex w-full mt-2">
+                        <div class="w-1/2 pr-2">
+                            <div class="flow-arrow">↓</div>
+                            <div class="bg-green-100 p-3 rounded-md h-full">
+                                <p class="font-semibold">YES</p>
+                                <p class="text-sm">Report to Lead VMA. Scribe is reassigned to another active provider.</p>
+                            </div>
+                        </div>
+                        <div class="w-1/2 pl-2">
+                             <div class="flow-arrow">↓</div>
+                             <div class="bg-red-100 p-3 rounded-md h-full">
+                                <p class="font-semibold">NO</p>
+                                <p class="text-sm">Remain with provider. Work on assigned inbox tasks during idle time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const encounterCtx = document.getElementById('encounterChart').getContext('2d');
+        new Chart(encounterCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Listen & Observe', 'Draft with Heidi AI', 'Verify & Edit', 'Place Orders'],
+                datasets: [{
+                    label: 'Encounter Steps',
+                    data: [30, 25, 30, 15],
+                    backgroundColor: ['#00A1E4', '#0077C0', '#005082', '#64B5F6'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+        
+        const priorityCtx = document.getElementById('priorityChart').getContext('2d');
+        new Chart(priorityCtx, {
+            type: 'bar',
+            data: {
+                labels: ["Provider's Inbox", "Main Office Inbox", "Admin Tasks (by VMA)"],
+                datasets: [{
+                    label: 'Task Priority Level',
+                    data: [100, 75, 50],
+                    backgroundColor: ['#00A1E4', '#0077C0', '#005082'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                           display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+
